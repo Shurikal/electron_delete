@@ -1,27 +1,40 @@
-const { app, BrowserWindow, shell } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, shell } = require("electron");
+const path = require("path");
+const fs = require('fs')
 
-function createWindow () {
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
-    }
-  })
+      contextIsolation: false,
+    },
+  });
 
-  win.loadFile('index.html')
+  win.loadFile("index.html");
+}
+
+function createFile() {
+  const filename = path.join(__dirname, "to_be_deleted");
+  fs.writeFile(filename, "", function (err) {
+    if (err) {
+      console.error("Failed to create file:", err);
+    } else {
+      console.log(`File ${filename} created successfully`);
+    }
+  });
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
+  createFile();
 
-  app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+  app.on("activate", function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+app.on("window-all-closed", function () {
+  if (process.platform !== "darwin") app.quit();
+});
