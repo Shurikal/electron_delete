@@ -1,4 +1,4 @@
-# Installation
+# Installation
 
 Clone the repository to a folder in OneDrive and run the following command:
 
@@ -6,7 +6,7 @@ Clone the repository to a folder in OneDrive and run the following command:
 $ npm install
 ```
 
-# Usage
+# Usage
 
 ```bash
 $ npm start
